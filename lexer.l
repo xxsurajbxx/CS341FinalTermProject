@@ -2,7 +2,7 @@
 #include <stdio.h>
 %}
 
-Letter [a-z A-Z]
+Letter [a-zA-Z]
 Digit [0-9]
 
 %%
@@ -39,13 +39,13 @@ Digit [0-9]
 
 [ \n\t\r]* {}
 
-{Letter}({Letter}|{Digit}|_)* {printf("IDENT\n");}
+{Letter}({Letter}|{Digit}|(_))* {printf("IDENT\n");}
 
 {Digit}*"."{Digit}+ {printf("RCONST\n");}
 
 {Digit}+ {printf("ICONST\n");}
 
-((["]({Letter}|{Digit}|[ ])*["])|([']({Letter}|{Digit}|[ ])*['])) {printf("SCONST\n");}
+((["](.)*["])|(['](.)*['])) {printf("SCONST\n");}
 
 . {printf("ERR\n");}
 
